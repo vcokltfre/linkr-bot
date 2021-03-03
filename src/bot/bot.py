@@ -1,5 +1,5 @@
 from discord.ext import commands
-from discord import Intents
+from discord import Intents, Message
 
 from aiohttp import ClientSession
 from typing import Optional
@@ -41,3 +41,8 @@ class Bot(commands.Bot):
         logger.info("HTTP session created.")
 
         await super().login(*args, **kwargs)
+
+    async def get_prefix(self, message: Message):
+        """Get a dynamic prefix."""
+
+        return "!"
