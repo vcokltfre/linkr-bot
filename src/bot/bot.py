@@ -5,6 +5,8 @@ from aiohttp import ClientSession
 from typing import Optional
 from loguru import logger
 
+from src.utils import Database
+
 
 class Bot(commands.Bot):
     """A subclassed version of commands.Bot with additional features."""
@@ -21,6 +23,7 @@ class Bot(commands.Bot):
         )
 
         self.http_session: Optional[ClientSession]
+        self.db: Database()
 
     def load_extensions(self, *exts):
         """Load a set of extensions."""
@@ -35,6 +38,5 @@ class Bot(commands.Bot):
         """Create the aiohttp ClientSession before logging in."""
 
         self.http_session = ClientSession()
-        await self.db.setup()
 
         await super().login(*args, **kwargs)

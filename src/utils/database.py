@@ -1,3 +1,4 @@
+from asyncio import get_event_loop
 from asyncpg import create_pool
 from os import getenv
 
@@ -7,6 +8,8 @@ class Database:
 
     def __init__(self):
         self.guilds = {}
+        loop = get_event_loop()
+        loop.run_until_complete(self.setup())
 
     async def setup(self):
         self.pool = await create_pool(
