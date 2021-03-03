@@ -38,5 +38,6 @@ class Bot(commands.Bot):
         """Create the aiohttp ClientSession before logging in."""
 
         self.http_session = ClientSession()
+        logger.info("HTTP session created.")
 
         await super().login(*args, **kwargs)
