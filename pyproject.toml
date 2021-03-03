@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "linkr"
+version = "1.0.0"
+description = "A cross-server communication bot for Discord"
+authors = ["vcokltfre <vcokltfre@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+"discord.py" = "^1.6.0"
+asyncpg = "^0.22.0"
+python-dotenv = "^0.15.0"
+jishaku = "^1.20.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
