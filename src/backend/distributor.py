@@ -28,7 +28,7 @@ class Distributor:
         for webhook in webhooks:
             self.channels[webhook.channel_id].append(webhook.hook)
 
-        logger.info(f"Cache saturated with {len(webhooks)} webhooks")
+        logger.info(f"Cache saturated with {len(webhooks)} webhooks.")
 
     async def send(self, channel_id: int, data: dict):
         if channel_id not in self.channels:

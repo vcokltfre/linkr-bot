@@ -32,9 +32,9 @@ class Bot(commands.Bot):
         for ext in exts:
             try:
                 self.load_extension(ext)
-                logger.info(f"Successfully loaded extension {ext}")
+                logger.info(f"Successfully loaded extension {ext}.")
             except Exception:
-                logger.error(f"Failed to load extension {ext}", exc_info=True)
+                logger.error(f"Failed to load extension {ext}.", exc_info=True)
 
         logger.info("Cog loading has completed.")
 
