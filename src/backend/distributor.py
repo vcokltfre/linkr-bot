@@ -15,9 +15,9 @@ class Distributor:
 
         bot.loop.run_until_complete(self.saturate_cache())
 
-    def pick_hook(self, channel: int):
-        hook = self.channels[channel].pop()
-        self.channels[channel].insert(0, hook)
+    def pick_hook(self, channel_id: int):
+        hook = self.channels[channel_id].pop()
+        self.channels[channel_id].insert(0, hook)
         return hook
 
     async def saturate_cache(self):
@@ -30,10 +30,10 @@ class Distributor:
 
         logger.info(f"Cache saturated with {len(webhooks)} webhooks")
 
-    async def send(self, channel: int, data: dict):
-        if channel not in self.channels:
+    async def send(self, channel_id: int, data: dict):
+        if channel_id not in self.channels:
             return
 
         await self.bot.wait_until_ready()
 
-        return await self.bot.http_session.post(self.pick_hook(channel), json=data)
+        return await self.bot.http_session.post(self.pick_hook(channel_id), json=data)
