@@ -9,7 +9,7 @@ class Logging(commands.Cog):
     """Event logging for Linkr."""
 
     def __init__(self, bot: Bot):
-        self.bot = Bot
+        self.bot = bot
 
     @commands.Cog.listener()
     async def on_connect(self):
