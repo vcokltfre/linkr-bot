@@ -34,6 +34,8 @@ class Bot(commands.Bot):
             except Exception:
                 logger.error(f"Failed to load extension {ext}", exc_info=True)
 
+        logger.info("Cog loading has completed.")
+
     async def login(self, *args, **kwargs) -> None:
         """Create the aiohttp ClientSession before logging in."""
 
