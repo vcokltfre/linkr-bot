@@ -23,7 +23,7 @@ class Bot(commands.Bot):
         )
 
         self.http_session: Optional[ClientSession]
-        self.db: Database()
+        self.db = Database()
 
     def load_extensions(self, *exts):
         """Load a set of extensions."""
