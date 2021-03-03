@@ -1,3 +1,4 @@
+from collections import defaultdict
 from loguru import logger
 
 from src.utils import Database
@@ -9,7 +10,7 @@ class Distributor:
     def __init__(self, bot):
         self.db: Database = bot.db
 
-        self.channels = {}
+        self.channels = defaultdict(list)
 
         bot.loop.run_until_complete(self.saturate_cache())
 
@@ -18,5 +19,7 @@ class Distributor:
         logger.info("Starting cache saturation...")
 
         webhooks = await self.db.fetch_webhooks()
-        print(webhooks)
+        for webhook in webhooks:
+            self.channels[webhook.channel] = webhook.hook
+
         logger.info(f"Cache saturated with {len(webhooks)} webhooks")
