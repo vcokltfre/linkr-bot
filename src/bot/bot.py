@@ -6,6 +6,7 @@ from typing import Optional
 from loguru import logger
 
 from src.utils import Database
+from src.backend import Distributor
 
 
 class Bot(commands.Bot):
@@ -24,6 +25,7 @@ class Bot(commands.Bot):
 
         self.http_session: Optional[ClientSession]
         self.db = Database()
+        self.distributor = Distributor(self)
 
     def load_extensions(self, *exts):
         """Load a set of extensions."""
