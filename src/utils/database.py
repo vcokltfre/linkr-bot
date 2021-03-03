@@ -2,6 +2,9 @@ from asyncio import get_event_loop
 from asyncpg import create_pool
 from os import getenv
 from loguru import logger
+from typing import List
+
+from .models import Webhook
 
 
 class Database:
@@ -34,3 +37,6 @@ class Database:
     async def fetch(self, query: str, *args):
         async with self.pool.acquire() as conn:
             return await conn.fetch(query, *args)
+
+    async def fetch_webhooks(self) -> List[Webhook]:
+        return [Webhook(d) for d in await self.fetch("SELECT * FROM Webhooks;")]
