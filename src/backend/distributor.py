@@ -8,11 +8,17 @@ class Distributor:
     """A distributor for webhook messages."""
 
     def __init__(self, bot):
+        self.bot = bot
         self.db: Database = bot.db
 
         self.channels = defaultdict(list)
 
         bot.loop.run_until_complete(self.saturate_cache())
+
+    def pick_hook(self, channel: int):
+        hook = self.channels[channel].pop()
+        self.channels[channel].insert(0, hook)
+        return hook
 
     async def saturate_cache(self):
         """Saturate the internal cache with webhooks and channels."""
@@ -20,6 +26,14 @@ class Distributor:
 
         webhooks = await self.db.fetch_webhooks()
         for webhook in webhooks:
-            self.channels[webhook.channel] = webhook.hook
+            self.channels[webhook.channel_id].append(webhook.hook)
 
         logger.info(f"Cache saturated with {len(webhooks)} webhooks")
+
+    async def send(self, channel: int, data: dict):
+        if channel not in self.channels:
+            return
+
+        await self.bot.wait_until_ready()
+
+        return await self.bot.http_session.post(self.pick_hook(channel), json=data)
