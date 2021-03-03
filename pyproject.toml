@@ -11,6 +11,7 @@ python = "^3.8"
 asyncpg = "^0.22.0"
 python-dotenv = "^0.15.0"
 jishaku = "^1.20.0"
+loguru = "^0.5.3"
 
 [tool.poetry.dev-dependencies]
 
