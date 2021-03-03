@@ -20,7 +20,8 @@ CREATE TABLE IF NOT EXISTS LinkrChannels (
 CREATE TABLE IF NOT EXISTS DiscordChannels (
     channel_id      BIGINT NOT NULL PRIMARY KEY,
     guild_id        BIGINT NOT NULL,
-    adder_id        BIGINT NOT NULL
+    adder_id        BIGINT NOT NULL,
+    linkr_channel   VARCHAR(255) NOT NULL REFERENCES LinkrChannels(channel_name) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Webhooks (
