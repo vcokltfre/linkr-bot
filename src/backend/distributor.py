@@ -25,6 +25,11 @@ class Distributor:
         self.webhooks[channel_id].insert(0, hook)
         return hook
 
+    def get_network_channel(self, channel_id: int):
+        if channel_id not in self.discord_channels:
+            return
+        return self.discord_channels[channel_id].linkr_channel
+
     async def saturate_cache(self):
         """Saturate the internal cache with webhooks and channels."""
         logger.info("Starting cache saturation...")
