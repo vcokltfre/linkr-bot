@@ -8,7 +8,7 @@ class DiscordChannel:
     def __init__(self, data):
         self.id: int = data["channel_id"]
         self.guild_id: int = data["guild_id"]
-        self.adder: int = data["adder"]
+        self.adder_id: int = data["adder_id"]
         self.linkr_channel: str = data["linkr_channel"]
 
 
