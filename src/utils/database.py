@@ -4,7 +4,7 @@ from os import getenv
 from loguru import logger
 from typing import List
 
-from .models import Webhook
+from .models import Webhook, DiscordChannel, LinkrChannel
 
 
 class Database:
@@ -40,3 +40,9 @@ class Database:
 
     async def fetch_webhooks(self) -> List[Webhook]:
         return [Webhook(d) for d in await self.fetch("SELECT * FROM Webhooks;")]
+
+    async def fetch_discord_channels(self) -> List[DiscordChannel]:
+        return [DiscordChannel(d) for d in await self.fetch("SELECT * FROM DiscordChannels;")]
+
+    async def fetch_linkr_channels(self) -> List[LinkrChannel]:
+        return [LinkrChannel(d) for d in await self.fetch("SELECT * FROM LinkrChannels;")]
