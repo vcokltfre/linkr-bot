@@ -3,6 +3,7 @@ from asyncpg import create_pool
 from os import getenv
 from loguru import logger
 from typing import List
+from json import dumps
 
 from .models import Webhook, DiscordChannel, LinkrChannel
 
@@ -46,3 +47,6 @@ class Database:
 
     async def fetch_linkr_channels(self) -> List[LinkrChannel]:
         return [LinkrChannel(d) for d in await self.fetch("SELECT * FROM LinkrChannels;")]
+
+    async def create_message(self, cmid: int, mid: int, cid: int, webhook: str, content: str):
+        await self.execute("INSERT INTO Messages VALUES ($1, $2, $3, $4, $5);", cmid, mid, cid, webhook, dumps(content))
