@@ -6,7 +6,7 @@ class Webhook:
 
 class DiscordChannel:
     def __init__(self, data):
-        self.id: int = data["id"]
+        self.id: int = data["channel_id"]
         self.guild_id: int = data["guild_id"]
         self.adder: int = data["adder"]
         self.linkr_channel: str = data["linkr_channel"]
