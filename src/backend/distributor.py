@@ -38,10 +38,12 @@ class Distributor:
         logger.info(f"Cache saturated with {len(webhooks)} webhooks.")
 
     async def send(self, id: int, channel_id: int, data: dict):
-        if channel_id not in self.channels:
+        if channel_id not in self.webhooks:
             return
 
         await self.bot.wait_until_ready()
+
+        data["username"] = data["username"] + f" | #{hex(id)[2:]}"
 
         return await self.bot.http_session.post(self.pick_hook(channel_id), json=data)
 
