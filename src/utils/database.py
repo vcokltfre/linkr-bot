@@ -48,5 +48,5 @@ class Database:
     async def fetch_linkr_channels(self) -> List[LinkrChannel]:
         return [LinkrChannel(d) for d in await self.fetch("SELECT * FROM LinkrChannels;")]
 
-    async def create_message(self, cmid: int, mid: int, cid: int, webhook: str, content: str):
+    async def create_message(self, cmid: int, mid: int, cid: int, webhook: str, content: dict):
         await self.execute("INSERT INTO Messages VALUES ($1, $2, $3, $4, $5);", cmid, mid, cid, webhook, dumps(content))
