@@ -47,6 +47,7 @@ class Distributor:
         await self.bot.wait_until_ready()
 
         data["username"] = data["username"] + f" | #{hex(id)[2:]}"
+        data["allowed_mentions"] = {"parse": []}
 
         hook = self.pick_hook(channel_id)
         lock = self.locks.get(hook)
