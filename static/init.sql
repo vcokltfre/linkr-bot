@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS Webhooks (
 );
 
 CREATE TABLE IF NOT EXISTS Messages (
-    c_message_id BIGINT NOT NULL PRIMARY KEY,
+    c_message_id    BIGINT NOT NULL PRIMARY KEY,
     message_id      BIGINT NOT NULL,
     channel_id      BIGINT NOT NULL,
     webhook_used    VARCHAR(255) NOT NULL REFERENCES Webhooks(webhook) ON DELETE CASCADE,
