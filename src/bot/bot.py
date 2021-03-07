@@ -46,7 +46,7 @@ class Bot(commands.Bot):
 
         await super().login(*args, **kwargs)
 
-    async def get_prefix(self, message: Message):
+    async def get_prefix(self, message: Message) -> str:
         """Get a dynamic prefix."""
 
         return "!"
